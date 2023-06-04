@@ -1,0 +1,52 @@
+@import '../../../assets/utils/variables';
+
+.issues {
+  margin: 50px 0;
+
+  .card {
+    border: 1px solid $offwhite;
+
+    .card-title {
+      color: $offwhite;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__search-input-wrapper {
+    flex: .3;
+    margin-right: 15px;
+  }
+
+  &__filter-container {
+    margin-bottom: 50px;
+  }
+
+  &__nav-container {
+    .nav-item {
+      border-top: 1px solid $offwhite;
+      border-right: 1px solid $offwhite;
+
+      &:first-of-type {
+        border-left: 1px solid $offwhite;
+        border-top-left-radius: 8px;
+      }
+
+      &:last-of-type {
+        border-top-right-radius: 8px;
+      }
+    }
+
+    .nav-link {
+      color: $offwhite !important;
+
+      &.active {
+        background-color: $offwhite !important;
+        color: $primary !important;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

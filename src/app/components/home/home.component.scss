@@ -1,0 +1,37 @@
+@import '../../../assets/utils/variables';
+
+.home {
+  &__repo-list-container {
+    overflow: hidden;
+    padding-bottom: 100px;
+  }
+
+  &__search-container {
+    margin: 120px 0 50px;
+  }
+
+  &__repo-card-wrapper {
+    overflow: visible;
+    margin-top: 120px;
+  }
+
+  &__search-input-wrapper {
+    flex: .3;
+    margin-right: 15px;
+  }
+}
+
+.text-gradient {
+  background: #FFB76B;
+  background: linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.inline-action {
+  color: $teel;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

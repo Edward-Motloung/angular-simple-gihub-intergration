@@ -1,0 +1,11 @@
+@import '../../../assets/utils/variables';
+
+.search {
+  input {
+    color: $offwhite;
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+}

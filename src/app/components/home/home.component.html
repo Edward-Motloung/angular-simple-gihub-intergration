@@ -1,0 +1,55 @@
+<ng-template #template>
+  <div class="modal-dialog flex-column w-100">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{selectedRepo.name}}</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p><b>Full Repo Name:</b> {{ selectedRepo.full_name }} </p>
+      <p><b>Description:</b> {{ selectedRepo.description }} </p>
+      <p><b>Homepage:</b>
+        <a *ngIf="selectedRepo.homepage" href="{{ selectedRepo.homepage }}" target="_blank"> {{ selectedRepo.homepage }} </a>
+        <span *ngIf="!selectedRepo.homepage"> No Home Page </span>
+      </p>
+      <p><b>GitHub URL:</b>
+        <a href="{{ selectedRepo.html_url }}" target="_blank"> {{ selectedRepo.html_url }} </a>
+      </p>
+      <p><b>Number of Forks:</b> {{ selectedRepo.forks_count }} </p>
+      <p><b>Number of Stargazers:</b> {{ selectedRepo.stargazers_count }} </p>
+      <p *ngIf="selectedRepo.has_issues">
+        <b>Number of Issues:</b>
+        {{ selectedRepo.open_issues_count }}
+        <a class="inline-action pl-3" *ngIf="selectedRepo.open_issues_count" (click)="goToIssues(selectedRepo)">View Issues</a>
+      </p>
+      <p><b>Watchers:</b> {{ selectedRepo.watchers_count }} </p>
+      <p><b>Language:</b> {{ selectedRepo.language }} </p>
+      <p><b>Date Created:</b> {{ selectedRepo.created_at }} </p>
+    </div>
+  </div>
+</ng-template>
+
+
+<div class="home home__container d-flex flex-column justify-content-center">
+  <div class="home__title-containerd-flex align-self-center mt-5">
+    <h1 class="">Welcome to the 7 Wonders of&nbsp;<span class="text-gradient d-inline"> Github! </span></h1>
+  </div>
+  <div class="home__search-container d-flex justify-content-center flex-md-row flex-column w-100">
+    <div class="home__search-input-wrapper">
+      <tx-search [label]="'Search for a repo'"></tx-search>
+    </div>
+    <div class="home__search-button-wrapper d-flex align-items-center">
+      <button target="_blank" class="btn btn-secondary mt-4" (click)="search(searchText)">Search</button>
+      <button target="_blank" class="btn btn-secondary mt-4 mx-2" (click)="clear()">Clear</button>
+    </div>
+  </div>
+
+  <div class="home__repo-list-container row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-sm-1 g-4" *ngIf="repos">
+    <div class="home__repo-card-wrapper col" *ngFor="let repo of repos.items">
+      <tx-repo-card [data]="repo" (click)="showRepoDetails(template, repo)"></tx-repo-card>
+    </div>
+  </div>
+</div>
+
+<app-experiment2 class="d-none d-md-flex" *ngIf="!repos"></app-experiment2>

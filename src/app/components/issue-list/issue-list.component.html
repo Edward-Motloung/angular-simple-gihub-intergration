@@ -1,0 +1,66 @@
+<div class="issues issues-container" *ngIf="issues.length">
+  <div class="issues__search-container d-flex justify-content-center flex-md-row flex-column w-100 mb-5">
+    <div class="issues__search-input-wrapper">
+      <tx-search [label]="'Search for an issue'"></tx-search>
+    </div>
+    <div class="issues__search-button-wrapper d-flex align-items-center">
+      <button target="_blank" class="btn btn-secondary mt-4" (click)="viewStats(issueReport)">View Stats</button>
+    </div>
+  </div>
+
+  <div class="issues__nav-container w-75 mx-auto d-flex justify-content-end">
+    <ul class="nav">
+      <li class="nav-item">
+        <span class="nav-link" [ngClass]="{'active': state === 'all'}" (click)="selectState('all')">All</span>
+      </li>
+      <li class="nav-item">
+        <span class="nav-link" [ngClass]="{'active': state === 'closed'}" (click)="selectState('closed')">Closed</span>
+      </li>
+      <li class="nav-item">
+        <span class="nav-link" [ngClass]="{'active': state === 'open'}" (click)="selectState('open')">Open</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="issues-wrapper d-flex flex-column align-items-center">
+    <div class="card w-75 mb-3" *ngFor="let issue of issues | filter: searchText" [hidden]="state != 'all' && issue.state !== state">
+      <div class="card-body">
+        <h3 class="card-title">{{ issue.title }}</h3>
+        <p class="card-text">
+          <span class="badge" [ngClass]="{' text-bg-success': issue.state === 'closed', 'text-bg-danger': issue.state === 'open'}">{{ issue.state }}</span>
+        </p>
+        <p class="card-text" [innerHTML]="issue.body"></p>
+        <p class="card-text"> Last Updated: {{ issue.updated_at }}</p>
+        <p class="card-text"> Upvotes: {{ issue.reactions['+1'] }}</p>
+        <a href="{{issue.html_url}}" target="_blank" class="btn btn-secondary">View Issue</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="issues issues-container" *ngIf="!issues">
+  <h1>This repo has no issues!</h1>
+</div>
+
+
+<ng-template #issueReport>
+  <div class="modal-dialog flex-column w-100">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Issue Stats</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+      <canvas baseChart
+        [type]="'pie'"
+        [datasets]="pieChartDatasets"
+        [labels]="pieChartLabels"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
+  </div>
+</ng-template>
+

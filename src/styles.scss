@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap';
+@import './assets/utils/variables';
+
+body {
+  margin: 0;
+}
+
+* {
+  background-color: $primary !important;
+  box-sizing: border-box;
+  color: $offwhite;
+  font-family: 'Roboto', Helvetica, Arial;
+  overflow-x: hidden;
+}
+
+.modal-content {
+  border: 1px solid $offwhite !important;
+}
+
+.modal-dialog {
+  pointer-events: unset !important;
+
+  a {
+    color: $teel !important;
+  }
+}
+
+@import "~bootstrap/scss/bootstrap";
