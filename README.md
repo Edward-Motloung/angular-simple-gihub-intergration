@@ -5,6 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Todo
 
 - Add pagination to pull issues beyond the default 30 issues.
+- Implement unit tests
 
 
 ## To run the application
